@@ -5,8 +5,7 @@ int main() {
   int n;
   cin >> n;
   vector<int> cards;
-  int player1 = 0;
-  int player2 = 0;
+  int player1 = 0, player2 = 0;
 
   for (int i = 0; i < n; i++) {
     int card;
@@ -15,23 +14,17 @@ int main() {
   }
 
   for (int i = 0; i < n; i++) {
+    int *playersTurn = &player1;
+    if (i % 2 != 0) playersTurn = &player2;
+
     if (cards.front() > cards.back()) {
-      if (i % 2 == 0) {
-        player1 += cards.front();
-      } else {
-        player2 += cards.front();
-      }
+      *playersTurn += cards.front();
       cards.erase(cards.begin());
     } else {
-      if (i % 2 == 0) {
-        player1 += cards.back();
-      } else {
-        player2 += cards.back();
-      }
+      *playersTurn += cards.back();
       cards.pop_back();
     }
   }
 
-  cout << player1 << endl;
-  cout << player2 << endl;
+  cout << player1 << " " << player2 << endl;
 }
